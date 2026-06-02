@@ -332,7 +332,56 @@ def parse_query_with_llm(query, columns):
         return parsed_json
 
     except Exception as e:
+        print("LLM failed, using rule-based fallback:", str(e))
+        return rule_based_parser(query)
+    
+#rule-base when ollama is down
+def rule_based_parser(query):
+    query = query.lower()
+
+    if "top" in query and "country" in query and "sales" in query:
         return {
-            "intent": "unknown",
-            "error": str(e)
+            "intent": "top_group",
+            "metric": "Sales",
+            "dimension": "Country",
+            "aggregation": "sum",
+            "sort_order": "desc",
+            "limit": 3,
+            "output_type": "table"
         }
+
+    if "country" in query and "highest" in query and "sales" in query:
+        return {
+            "intent": "top_group",
+            "metric": "Sales",
+            "dimension": "Country",
+            "aggregation": "sum",
+            "sort_order": "desc",
+            "limit": 1,
+            "output_type": "text"
+        }
+
+    if "sales" in query and "country" in query and ("show" in query or "chart" in query):
+        return {
+            "intent": "grouped_chart",
+            "metric": "Sales",
+            "dimension": "Country",
+            "aggregation": "sum",
+            "chart_type": "bar",
+            "output_type": "chart"
+        }
+
+    if "trend" in query and "sales" in query:
+        return {
+            "intent": "time_series",
+            "metric": "Sales",
+            "date_column": "OrderDate",
+            "aggregation": "sum",
+            "time_grain": "D",
+            "chart_type": "line",
+            "output_type": "chart"
+        }
+
+    return {
+        "intent": "unknown"
+    }

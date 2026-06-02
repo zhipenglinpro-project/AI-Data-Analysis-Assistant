@@ -44,6 +44,9 @@ Users can upload datasets, explore business performance, ask natural language qu
 - AI executive report generation
 - Multi-turn context support
 
+Note: The full AI features use Ollama with llama3.2 locally.  
+The cloud demo includes a rule-based fallback when Ollama is not available.
+
 ### Visualization
 
 - Interactive Plotly charts
@@ -173,3 +176,4 @@ What about profit?
 - Database support
 - Cloud deployment
 - User authentication
+

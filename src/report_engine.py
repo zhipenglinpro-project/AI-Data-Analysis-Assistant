@@ -46,6 +46,9 @@ Generate an executive report based on the insights above.
 
         return response["message"]["content"]
 
-    except Exception as e:
-        return f"Report generation failed: {str(e)}"
+    except Exception:
+        return (
+            "Executive report generation is available in the local version using Ollama and llama3.2. "
+            "Please run the project locally with Ollama enabled to use this feature."
+        )
     

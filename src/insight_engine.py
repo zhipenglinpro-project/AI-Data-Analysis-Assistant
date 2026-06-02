@@ -47,5 +47,8 @@ Generate a short business insight.
 
         return response["message"]["content"]
 
-    except Exception as e:
-        return f"Insight generation failed: {str(e)}"
+    except Exception:
+        return (
+            "AI insight is available in the local version using Ollama and llama3.2. "
+            "This cloud demo uses the structured analysis engine for data results."
+        )
