@@ -1,3 +1,11 @@
+# AI Data Analysis Assistant
+
+🚀 Live Demo:
+https://ai-data-analysis-assistant-nqxrmeyyxdmhhlndnjwzr6.streamlit.app/
+
+📂 GitHub Repository:
+https://github.com/zhipenglinpro-project/AI-Data-Analysis-Assistant
+
 ## Application Preview
 
 ### Dashboard
